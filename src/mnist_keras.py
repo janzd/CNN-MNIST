@@ -1,4 +1,5 @@
 from __future__ import division
+import os
 import numpy as np
 import pandas as pd
 
@@ -66,7 +67,7 @@ x = Dropout(0.2)(x)
 x = ZeroPadding2D((1, 1))(x)
 x = Convolution2D(512, 3, 3, init='he_normal')(x)
 x = Activation('relu')(x)
-x = Dropout(0.3)(x)
+x = Dropout(0.2)(x)
 x = ZeroPadding2D((1, 1))(x)
 x = Convolution2D(512, 3, 3, init='he_normal')(x)
 x = Activation('relu')(x)
@@ -87,7 +88,7 @@ model = Model(input=inputs, output=predictions)
 # print the model
 model.summary()
 # set up the optimizer
-adam = opt.Nadam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
+adam = opt.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
 # compile the model with multiclass logloss (categorical cross-entropy) as the loss function
 # and use classification accuracy as another metric to measure
 model.compile(loss="categorical_crossentropy", optimizer=adam, metrics=["accuracy"])
